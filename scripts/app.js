@@ -16,14 +16,16 @@ function populateBlog(arr){
     allBlogs = [];
     for (var i = 0; i < arr.length; i++){
         let blog = arr[i];
-        document.querySelector(".blog-body").innerHTML += create.blogTemplate(blog.id, blog.title, blog.date, blog.content);    
+        document.querySelector(".blog-body").innerHTML += create.blogTemplate(blog.id, blog.title, blog.date, blog.content);
+        // add event listeners here    
     }  
 };
 let postNewBlog= document.querySelector("#new-post");
 let menuArea = document.querySelector('#menu-area');
-console.log(menuArea);
+
 function openNewBlogWindow () {
     menuArea.innerHTML = create.newBlogTemplate();
+    //add close event listener here
 }
 postNewBlog.addEventListener("click",function(){
     openNewBlogWindow();

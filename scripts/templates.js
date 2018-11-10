@@ -12,8 +12,8 @@ const blogTemplate = (id, title, date, content) => {
                     <p>${content}</p>
                 </div>
                 <div>
-                    <button id ="${id}" type="button" class="btn btn-outline-danger">Update</button>
-                    <button id ="${id}" type="button" class="btn btn-outline-warning">Delete</button>
+                    <button id ="${id}-edit" type="button" class="btn btn-outline-danger">Update</button>
+                    <button id ="${id}-delete" type="button" class="btn btn-outline-warning">Delete</button>
                 </div>
             </div>
         </div>
@@ -24,7 +24,14 @@ const blogTemplate = (id, title, date, content) => {
       return `
           <div class="form-group ">
               <form id="galvanizerole">
-                  <h2>Post Information</h2>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-10">
+                        <h2>Post Information</h2>
+                    </div>
+                    <div class="col-2">
+                        <button id = "stop-post" type="button" class="btn btn-outline-dark">X</button>
+                    </div>
+                  </div>
                   <div class="menuBar">
                       <label class="menuBar" for="blogID">Blog ID</label>
                   </div>
