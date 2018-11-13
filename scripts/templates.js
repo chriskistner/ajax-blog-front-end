@@ -4,9 +4,9 @@ const blogTemplate = (id, title, date, content) => {
         <div class="row">
             <div class="column">
                 <div class= "blog-header">
-                    <h2>${title}</h2>
+                    <h2 id = "blogTitle">${title}</h2>
                     <p>Created/Last Updated: ${date}</p>
-                    <p><i>id: ${id}</i></p>
+                    <p id="blogIDNum" data-id="${id}"><i>id: ${id}</i></p>
                 </div>
             <hr />
                 <div class = "blog-body">
@@ -50,7 +50,7 @@ const blogTemplate = (id, title, date, content) => {
   const updateBlogTemplate = (id, title, content) => {
     return `
         <div class="form-group ">
-            <form id="submitPost">
+            <form id="submitUpdatedPost">
               <div class="row align-items-center justify-content-between">
                   <div class="col-10">
                       <h2>Post Information</h2>
@@ -63,12 +63,12 @@ const blogTemplate = (id, title, date, content) => {
                 <p  class="postID">${id}</p>
                     <label class="menuBar" for="blogTitle">Title</label>
                 </div>
-                <input class="input-fieldB" type="text" id="blogTitle" value="${title}">
+                <input class="input-fieldB" type="text" id="updateTitle" value="${title}">
                 <div class="menuBar">
                     <label class="menuBar" for="blogContent">Content</label>
                 </div>
-                <textarea class="input-fieldC" type="text" id="blogContent">${content}</textarea><br>
-                <input type="submit" id="submission" value="Update">
+                <textarea class="input-fieldC" type="text" id="updatedContent">${content}</textarea><br>
+                <input type="submit" id="submitUpdate" value="Update">
             </form>
         </div>
     `

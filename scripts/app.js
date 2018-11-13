@@ -15,8 +15,24 @@ function getPosts() { axios.get(apiURL)
 
 getPosts();
 
+let searchForBlog = document.querySelector('#findPost');
+
+function getPost(blog) {
+    axios.get(apiURL + `/${blog}`)
+        .then(function (result) {
+            let blog = result.data.data;
+            populateBlog(blog);
+        })
+
+}
+
+searchForBlog.addEventListener('submit', function(event){
+    event.preventDefault();
+    let targetBlog = event.target.searchField.value;
+    getPost(targetBlog);
+})
+
 function populateBlog(arr){
-    allBlogs = [];
 
     const appliedTemplates = arr.map(blog => create.blogTemplate(blog.id, blog.title, blog.date, blog.content)).join('\n')
     document.querySelector(".blog-body").innerHTML = appliedTemplates
@@ -33,7 +49,7 @@ function populateBlog(arr){
         })
 
         updateBlogButton.addEventListener('click', function() {
-            openUpdateBlogWindow(blog.id, blog.title, blog.content);
+            openUpdateBlogWindow(blog);
         })
     }  
 };
@@ -50,12 +66,29 @@ function openNewBlogWindow () {
     })
 };
 
-function openUpdateBlogWindow () {
-    menuArea.innerHTML = create.updateBlogTemplate();
+function openUpdateBlogWindow (blog) {
+    menuArea.innerHTML = create.updateBlogTemplate(blog.id, blog.title, blog.content);
     menuArea.classList.remove('hide-menu');
+
     let closeButton = document.querySelector('#stop-post');
+    let submitUpdateBlog = document.querySelector('#submitUpdatedPost');
+    let updatedTitle = document.querySelector('#updateTitle')
+    let updatedContent = document.querySelector(`#updatedContent`);
+
     closeButton.addEventListener('click', function(){
         menuArea.classList.add('hide-menu');
+    })
+    submitUpdateBlog.addEventListener('submit', function(event){
+        event.preventDefault();
+        const updatePost = axios.put(apiURL+`/${blog.id}`, {
+            title : updatedTitle.value,
+            content: updatedContent.value
+        })
+        .then(function(){
+            console.log('Updated');
+            getPosts();
+            menuArea.classList.add('hide-menu');
+        })
     })
 };
 
@@ -78,3 +111,4 @@ postNewBlog.addEventListener("click",function(){
         });
     });
 });
+
