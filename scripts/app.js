@@ -7,7 +7,7 @@ const create = require('./templates');
 function getPosts() { axios.get(apiURL) 
     .then(function (result) {
         let blogs = result.data.data;
-        let sortedBlogs = blogs.sort(sortBy('date'))
+        let sortedBlogs = blogs.sort(sortBy('-date'))
         
         populateBlog(sortedBlogs);
     })
@@ -20,17 +20,22 @@ let searchForBlog = document.querySelector('#findPost');
 function getPost(blog) {
     axios.get(apiURL + `/${blog}`)
         .then(function (result) {
-            let blog = result.data.data;
-            populateBlog(blog);
+            let blog = result.data;
+            populateBlog([blog]);
         })
-
 }
 
 searchForBlog.addEventListener('submit', function(event){
     event.preventDefault();
     let targetBlog = event.target.searchField.value;
     getPost(targetBlog);
+    event.target.searchField.value = '';
 })
+
+let getAllPosts = document.querySelector('#all-posts');
+getAllPosts.addEventListener('click', function(){
+    getPosts();
+});
 
 function populateBlog(arr){
 
