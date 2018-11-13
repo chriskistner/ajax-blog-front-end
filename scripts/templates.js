@@ -13,7 +13,7 @@ const blogTemplate = (id, title, date, content) => {
                     <p>${content}</p>
                 </div>
                 <div>
-                    <button id="editPost" type="button" class="btn btn-outline-danger">Update</button>
+                    <button id="editPost" data-id="${id}" type="button" class="btn btn-outline-danger">Update</button>
                     <button id="deletePost" data-id="${id}" type="button" class="btn btn-outline-warning">Delete</button>
                 </div>
             </div>
@@ -47,7 +47,35 @@ const blogTemplate = (id, title, date, content) => {
       `
   }
 
+  const updateBlogTemplate = (id, title, content) => {
+    return `
+        <div class="form-group ">
+            <form id="submitPost">
+              <div class="row align-items-center justify-content-between">
+                  <div class="col-10">
+                      <h2>Post Information</h2>
+                  </div>
+                  <div class="col-2">
+                      <button id = "stop-post" type="button" class="btn btn-outline-dark">X</button>
+                  </div>
+                </div>
+                <div class="menuBar">
+                <p  class="postID">${id}</p>
+                    <label class="menuBar" for="blogTitle">Title</label>
+                </div>
+                <input class="input-fieldB" type="text" id="blogTitle" value="${title}">
+                <div class="menuBar">
+                    <label class="menuBar" for="blogContent">Content</label>
+                </div>
+                <textarea class="input-fieldC" type="text" id="blogContent">${content}</textarea><br>
+                <input type="submit" id="submission" value="Update">
+            </form>
+        </div>
+    `
+}
+
   module.exports = { 
       blogTemplate,
       newBlogTemplate,
+      updateBlogTemplate
   }

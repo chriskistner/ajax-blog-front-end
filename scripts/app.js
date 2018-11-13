@@ -5,12 +5,12 @@ const axios = require('axios');
 const create = require('./templates');
 
 function getPosts() { axios.get(apiURL) 
-.then(function (result) {
-    let blogs = result.data.data;
-    let sortedBlogs = blogs.sort(sortBy('date'))
-
-    populateBlog(sortedBlogs);
-})
+    .then(function (result) {
+        let blogs = result.data.data;
+        let sortedBlogs = blogs.sort(sortBy('date'))
+        
+        populateBlog(sortedBlogs);
+    })
 };
 
 getPosts();
@@ -22,13 +22,18 @@ function populateBlog(arr){
     document.querySelector(".blog-body").innerHTML = appliedTemplates
     
     for (const blog of arr){
-        let deleteBlogButton = document.querySelector(`[data-id="${blog.id}"]`);
+        let deleteBlogButton = document.querySelector(`#deletePost[data-id="${blog.id}"]`);
+        let updateBlogButton = document.querySelector(`#editPost[data-id="${blog.id}"]`);
         deleteBlogButton.addEventListener('click', function(){
             axios.delete(apiURL+`/${blog.id}`)
             .then(function(){
                 console.log("Post Deleted")
                 getPosts();
             })
+        })
+
+        updateBlogButton.addEventListener('click', function() {
+            openUpdateBlogWindow(blog.id, blog.title, blog.content);
         })
     }  
 };
@@ -43,7 +48,16 @@ function openNewBlogWindow () {
     closeButton.addEventListener('click', function(){
         menuArea.classList.add('hide-menu');
     })
-}
+};
+
+function openUpdateBlogWindow () {
+    menuArea.innerHTML = create.updateBlogTemplate();
+    menuArea.classList.remove('hide-menu');
+    let closeButton = document.querySelector('#stop-post');
+    closeButton.addEventListener('click', function(){
+        menuArea.classList.add('hide-menu');
+    })
+};
 
 postNewBlog.addEventListener("click",function(){
     openNewBlogWindow();
