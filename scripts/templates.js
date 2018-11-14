@@ -1,18 +1,19 @@
 
 const blogTemplate = (id, title, date, content) => {
     return `
-        <div class="row">
-            <div class="column">
-                <div class= "blog-header">
+        <div class="row blog-row">
+            <div class="col-12 border border-dark rounded-top">
+                <div class= "blog-header blog-box">
                     <h2 id = "blogTitle">${title}</h2>
-                    <p>Created/Last Updated: ${date}</p>
-                    <p id="blogIDNum" data-id="${id}"><i>id: ${id}</i></p>
+                    <p style="margin-bottom: 0px;">Created/Last Updated: ${date}</p>
+                    <p style="margin-bottom: 2px;" id="blogIDNum" data-id="${id}"><i>id: ${id}</i></p>
                 </div>
-            <hr />
-                <div class = "blog-body">
+            <hr style="margin-top: 2px;" />
+                <div class = "blog-body blog-box">
                     <p>${content}</p>
                 </div>
-                <div>
+            <hr style="margin-bottom: 2px;" />
+                <div class="blog-box">
                     <button id="editPost" data-id="${id}" type="button" class="btn btn-outline-danger">Update</button>
                     <button id="deletePost" data-id="${id}" type="button" class="btn btn-outline-warning">Delete</button>
                 </div>
@@ -23,7 +24,7 @@ const blogTemplate = (id, title, date, content) => {
 
   const newBlogTemplate = () => {
       return `
-          <div class="form-group ">
+          <div class="form-group">
               <form id="submitPost">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-10">

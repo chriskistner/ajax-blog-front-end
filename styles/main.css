@@ -14,3 +14,16 @@
 .hide-menu {
     display: none;
 }
+
+.blog-box {
+    margin: 5px;
+}
+
+.blog-menu {
+    margin: 10px;
+}
+
+.blog-row {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
