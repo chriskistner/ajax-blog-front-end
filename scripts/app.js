@@ -4,6 +4,7 @@ var sortBy = require('sort-by');
 const axios = require('axios');
 const create = require('./templates');
 
+//GENERATE ALL BLOGS FOR PAGE, RAN ON INTIAL LOAD
 function getPosts() { axios.get(apiURL) 
     .then(function (result) {
         let blogs = result.data.data;
@@ -12,9 +13,9 @@ function getPosts() { axios.get(apiURL)
         populateBlog(sortedBlogs);
     })
 };
-
 getPosts();
 
+//LOCATE ONE SPECIFC BLOG BASED ON ID AND RENDER IT
 let searchForBlog = document.querySelector('#findPost');
 
 function getPost(blog) {
@@ -32,11 +33,13 @@ searchForBlog.addEventListener('submit', function(event){
     event.target.searchField.value = '';
 })
 
+//BUTTON THAT GETS ALL BLOGS IF YOU ARE VIEWING JUST ONE
 let getAllPosts = document.querySelector('#all-posts');
 getAllPosts.addEventListener('click', function(){
     getPosts();
 });
 
+//PULLS ALL BLOGS FROM THE SERVER AND GENERATES ALL THE BLOG COLUMNS TO BE RENDERED
 function populateBlog(arr){
 
     const appliedTemplates = arr.map(blog => create.blogTemplate(blog.id, blog.title, blog.date, blog.content)).join('\n')
@@ -59,7 +62,7 @@ function populateBlog(arr){
     }  
 };
 
-
+// OPENS THE FORM WINDOW TO CREATE A NEW BLOG
 let postNewBlog= document.querySelector("#new-post");
 let menuArea = document.querySelector('#menu-area');
 
@@ -71,6 +74,7 @@ function openNewBlogWindow () {
     })
 };
 
+//OPENS THE UPDATE FORM WINDOW TO UPDATE AN EXISTING BLOG
 function openUpdateBlogWindow (blog) {
     menuArea.innerHTML = create.updateBlogTemplate(blog.id, blog.title, blog.content);
     menuArea.classList.remove('hide-menu');
@@ -97,6 +101,7 @@ function openUpdateBlogWindow (blog) {
     })
 };
 
+//POSTS A NEW BLOG TO THE SERVER AND RE-RENDERS THE BLOG PAGE
 postNewBlog.addEventListener("click",function(){
     openNewBlogWindow();
     menuArea.classList.remove('hide-menu');
