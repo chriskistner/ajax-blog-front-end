@@ -1947,7 +1947,7 @@ sortBy = function sortBy() {
 module.exports = sortBy;
 },{"object-path":27}],30:[function(require,module,exports){
 var blogs;
-var apiURL = "https://chrisk-ajax-blog.herokuapp.com/";
+var apiURL = "https://chrisk-ajax-blog.herokuapp.com/blog";
 var sortBy = require('sort-by');
 const axios = require('axios');
 const create = require('./templates');

@@ -1,5 +1,5 @@
 var blogs;
-var apiURL = "https://chrisk-ajax-blog.herokuapp.com/";
+var apiURL = "https://chrisk-ajax-blog.herokuapp.com/blog";
 var sortBy = require('sort-by');
 const axios = require('axios');
 const create = require('./templates');
